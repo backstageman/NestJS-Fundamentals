@@ -1,10 +1,12 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpCode,
   HttpStatus,
   Param,
+  Patch,
   Post,
   Query,
   Res,
@@ -67,5 +69,16 @@ export class CoffeesController {
   @Post('copy')
   createCopy(@Body('name') name: string) {
     return name;
+  }
+
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() body) {
+    console.log('body >>', body);
+    return `This action updates a #${id} coffee`;
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return `This action removes a #${id} coffee`;
   }
 }

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 
 @Controller('coffees')
 export class CoffeesController {
@@ -14,7 +14,7 @@ export class CoffeesController {
   }
 
   // 路由中的url参数
-  @Get(':id')
+  /*   @Get(':id')
   findOne(@Param() params) {
     // params是所有的请求参数
     return `This action returns a #${params.id} coffee`;
@@ -25,6 +25,18 @@ export class CoffeesController {
   findOneCopy(@Param('id') id: string) {
     // params是所有的请求参数
     return `This action returns a #${id} coffee copy`;
+  } */
+
+  // Query Params
+  @Get('list1')
+  findAllFlavors(@Query() paginationQuery) {
+    return paginationQuery;
+  }
+
+  // Get parts from Query Params
+  @Get('list2')
+  findAllFlavorsCopy(@Query('page') page, @Query('size') size) {
+    return { page, size };
   }
 
   // Body Params
@@ -34,7 +46,7 @@ export class CoffeesController {
   }
 
   // get parts from Body Params
-  @Post('/copy')
+  @Post('copy')
   createCopy(@Body('name') name: string) {
     return name;
   }

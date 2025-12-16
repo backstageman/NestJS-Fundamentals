@@ -58,6 +58,12 @@ export class CoffeesController {
     return { page, size };
   }
 
+  @Get('list3')
+  findAllFlavorsCopy3(@Query() pagenationDTO) {
+    const { limit, offset } = pagenationDTO;
+    return `limit: ${limit}, offset: ${offset}`;
+  }
+
   // Body Params
   @Post()
   @HttpCode(HttpStatus.GONE)

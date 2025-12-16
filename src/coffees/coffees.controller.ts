@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 
 @Controller('coffees')
 export class CoffeesController {
@@ -25,5 +25,17 @@ export class CoffeesController {
   findOneCopy(@Param('id') id: string) {
     // params是所有的请求参数
     return `This action returns a #${id} coffee copy`;
+  }
+
+  // Body Params
+  @Post()
+  create(@Body() body) {
+    return body;
+  }
+
+  // get parts from Body Params
+  @Post('/copy')
+  createCopy(@Body('name') name: string) {
+    return name;
   }
 }

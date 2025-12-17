@@ -39,10 +39,11 @@ export class CoffeesController {
 
   // 路由中的url参数
   @Get(':id')
-  findOne(@Param() params) {
+  findOne(@Param('id') id: number) {
     // params是所有的请求参数
     // return `This action returns a #${params.id} coffee`;
-    return this.coffeesService.findOne(+params.id);
+    console.log(typeof id); // string
+    return this.coffeesService.findOne(id);
   }
 
   // 路由中的url参数
@@ -74,6 +75,7 @@ export class CoffeesController {
   @Post()
   @HttpCode(HttpStatus.CREATED)
   create(@Body() createCoffeeDto: CreateCoffeeDto) {
+    console.log(createCoffeeDto instanceof CreateCoffeeDto); // false
     return this.coffeesService.create(createCoffeeDto);
   }
 

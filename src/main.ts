@@ -8,6 +8,7 @@ async function bootstrap() {
     new ValidationPipe({
       whitelist: true, // 去除DTO中没有的属性
       forbidNonWhitelisted: true, // 有非DTO中的属性时抛出错误
+      transform: true, // 自动转换参数类型
     }),
   );
   await app.listen(3000);

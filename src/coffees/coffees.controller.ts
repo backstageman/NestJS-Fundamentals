@@ -11,12 +11,15 @@ import {
   Query,
   Res,
 } from '@nestjs/common';
+import { CoffeesService } from './coffees.service';
 
 @Controller('coffees')
 export class CoffeesController {
-  @Get('')
+  constructor(private readonly coffeesService: CoffeesService) {}
+
+  @Get()
   findAll() {
-    return 'This action returns all coffees';
+    return this.coffeesService.findAll();
   }
 
   @Get('/list-res')
@@ -33,10 +36,11 @@ export class CoffeesController {
   }
 
   // 路由中的url参数
-  /*   @Get(':id')
+  @Get(':id')
   findOne(@Param() params) {
     // params是所有的请求参数
-    return `This action returns a #${params.id} coffee`;
+    // return `This action returns a #${params.id} coffee`;
+    return this.coffeesService.findOne(+params.id);
   }
 
   // 路由中的url参数
@@ -44,7 +48,7 @@ export class CoffeesController {
   findOneCopy(@Param('id') id: string) {
     // params是所有的请求参数
     return `This action returns a #${id} coffee copy`;
-  } */
+  }
 
   // Query Params
   @Get('list1')
@@ -68,7 +72,7 @@ export class CoffeesController {
   @Post()
   @HttpCode(HttpStatus.GONE)
   create(@Body() body) {
-    return body;
+    return this.coffeesService.create(body);
   }
 
   // get parts from Body Params
@@ -79,12 +83,11 @@ export class CoffeesController {
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() body) {
-    console.log('body >>', body);
-    return `This action updates a #${id} coffee`;
+    return this.coffeesService.update(+id, body);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return `This action removes a #${id} coffee`;
+    return this.coffeesService.remove(+id);
   }
 }

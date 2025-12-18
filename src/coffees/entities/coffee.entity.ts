@@ -1,4 +1,11 @@
-import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Flavor } from './flavor.entity';
 
 @Entity() // sql用小写命名表coffee
 export class Coffee {
@@ -11,6 +18,8 @@ export class Coffee {
   @Column()
   brand: string;
 
-  @Column('json', { nullable: true })
+  // @Column('json', { nullable: true })
+  @JoinTable() // 表示该表是主表
+  @ManyToMany((type) => Flavor, (falvor) => falvor.coffees)
   flavors: string[];
 }

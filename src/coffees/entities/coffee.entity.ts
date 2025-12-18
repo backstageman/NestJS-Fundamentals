@@ -18,6 +18,9 @@ export class Coffee {
   @Column()
   brand: string;
 
+  @Column({ default: 0 })
+  recommendations: number;
+
   // @Column('json', { nullable: true })
   @JoinTable() // 表示该表是主表
   @ManyToMany((type) => Flavor, (falvor) => falvor.coffees, {

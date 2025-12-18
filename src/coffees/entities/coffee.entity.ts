@@ -20,6 +20,8 @@ export class Coffee {
 
   // @Column('json', { nullable: true })
   @JoinTable() // 表示该表是主表
-  @ManyToMany((type) => Flavor, (falvor) => falvor.coffees)
-  flavors: string[];
+  @ManyToMany((type) => Flavor, (falvor) => falvor.coffees, {
+    cascade: true, // 级联操作
+  })
+  flavors: Flavor[];
 }
